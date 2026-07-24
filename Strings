@@ -1,0 +1,280 @@
+1.Given a valid (IPv4) IP address, return a defanged version of that IP address.
+
+A defanged IP address replaces every period "." with "[.]".
+
+ 
+
+Example 1:
+
+Input: address = "1.1.1.1"
+Output: "1[.]1[.]1[.]1"
+Example 2:
+
+Input: address = "255.100.50.0"
+Output: "255[.]100[.]50[.]0"
+ 
+
+Constraints:
+
+The given address is a valid IPv4 address.
+
+Answer:- 
+
+class Solution {
+    public String defangIPaddr(String address) {
+        StringBuilder sb = new StringBuilder();
+        for (char c : address.toCharArray()) {
+            if (c == '.') {
+                sb.append("[.]");
+            } else {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
+}
+
+
+2.You are given a string s and an integer array indices of the same length. The string s will be shuffled such that the character at the ith position moves to indices[i] in the shuffled string.
+
+Return the shuffled string.
+
+ 
+
+Example 1:
+
+
+Input: s = "codeleet", indices = [4,5,6,7,0,2,1,3]
+Output: "leetcode"
+Explanation: As shown, "codeleet" becomes "leetcode" after shuffling.
+Example 2:
+
+Input: s = "abc", indices = [0,1,2]
+Output: "abc"
+Explanation: After shuffling, each character remains in its position.
+ 
+
+Constraints:
+
+s.length == indices.length == n
+1 <= n <= 100
+s consists of only lowercase English letters.
+0 <= indices[i] < n
+All values of indices are unique.
+
+Answer:-
+
+class Solution {
+    public String restoreString(String s, int[] indices) {
+        char[] result = new char[s.length()];
+        
+        for (int i = 0; i < s.length(); i++) {
+            result[indices[i]] = s.charAt(i);
+        }
+        
+        return new String(result);
+    }
+}
+
+
+3.You own a Goal Parser that can interpret a string command. The command consists of an alphabet of "G", "()" and/or "(al)" in some order. The Goal Parser will interpret "G" as the string "G", "()" as the string "o", and "(al)" as the string "al". The interpreted strings are then concatenated in the original order.
+
+Given the string command, return the Goal Parser's interpretation of command.
+
+ 
+
+Example 1:
+
+Input: command = "G()(al)"
+Output: "Goal"
+Explanation: The Goal Parser interprets the command as follows:
+G -> G
+() -> o
+(al) -> al
+The final concatenated result is "Goal".
+Example 2:
+
+Input: command = "G()()()()(al)"
+Output: "Gooooal"
+Example 3:
+
+Input: command = "(al)G(al)()()G"
+Output: "alGalooG"
+ 
+
+Constraints:
+
+1 <= command.length <= 100
+command consists of "G", "()", and/or "(al)" in some order.
+
+Answer:-
+
+class Solution {
+    public String interpret(String command) {
+        StringBuilder sb = new StringBuilder();
+        int i = 0;
+        
+        while (i < command.length()) {
+            if (command.charAt(i) == 'G') {
+                sb.append('G');
+                i++;
+            } else if (command.charAt(i) == '(' && command.charAt(i + 1) == ')') {
+                sb.append('o');
+                i += 2;
+            } else {
+                sb.append("al");
+                i += 4;
+            }
+        }
+        
+        return sb.toString();
+    }
+}
+
+
+4.You are given a 0-indexed binary string s and two integers minJump and maxJump. In the beginning, you are standing at index 0, which is equal to '0'. You can move from index i to index j if the following conditions are fulfilled:
+
+i + minJump <= j <= min(i + maxJump, s.length - 1), and
+s[j] == '0'.
+Return true if you can reach index s.length - 1 in s, or false otherwise.
+
+ 
+
+Example 1:
+
+Input: s = "011010", minJump = 2, maxJump = 3
+Output: true
+Explanation:
+In the first step, move from index 0 to index 3. 
+In the second step, move from index 3 to index 5.
+Example 2:
+
+Input: s = "01101110", minJump = 2, maxJump = 3
+Output: false
+ 
+
+Constraints:
+
+2 <= s.length <= 105
+s[i] is either '0' or '1'.
+s[0] == '0'
+1 <= minJump <= maxJump < s.length
+
+Answer:-
+
+class Solution {
+    public boolean canReach(String s, int minJump, int maxJump) {
+        int n = s.length();
+        if (s.charAt(n - 1) == '1') {
+            return false;
+        }
+
+        boolean[] dp = new boolean[n];
+        dp[0] = true;
+        
+        int furthestAvailable = 0;
+
+        for (int i = 0; i < n; i++) {
+            if (!dp[i]) {
+                continue;
+            }
+
+            int startRange = Math.max(i + minJump, furthestAvailable + 1);
+            int endRange = Math.min(i + maxJump, n - 1);
+
+            for (int j = startRange; j <= endRange; j++) {
+                if (s.charAt(j) == '0') {
+                    dp[j] = true;
+                }
+            }
+
+            furthestAvailable = Math.max(furthestAvailable, endRange);
+        }
+
+        return dp[n - 1];
+    }
+}
+
+
+5.Given a string s, return whether s is a valid number.
+
+For example, all the following are valid numbers: "2", "0089", "-0.1", "+3.14", "4.", "-.9", "2e10", "-90E3", "3e+7", "+6e-1", "53.5e93", "-123.456e789", while the following are not valid numbers: "abc", "1a", "1e", "e3", "99e2.5", "--6", "-+3", "95a54e53".
+
+Formally, a valid number is defined using one of the following definitions:
+
+An integer number followed by an optional exponent.
+A decimal number followed by an optional exponent.
+An integer number is defined with an optional sign '-' or '+' followed by digits.
+
+A decimal number is defined with an optional sign '-' or '+' followed by one of the following definitions:
+
+Digits followed by a dot '.'.
+Digits followed by a dot '.' followed by digits.
+A dot '.' followed by digits.
+An exponent is defined with an exponent notation 'e' or 'E' followed by an integer number.
+
+The digits are defined as one or more digits.
+
+ 
+
+Example 1:
+
+Input: s = "0"
+
+Output: true
+
+Example 2:
+
+Input: s = "e"
+
+Output: false
+
+Example 3:
+
+Input: s = "."
+
+Output: false
+
+ 
+
+Constraints:
+
+1 <= s.length <= 20
+s consists of only English letters (both uppercase and lowercase), digits (0-9), plus '+', minus '-', or dot '.'.
+
+Answer:-
+
+class Solution {
+    public boolean isNumber(String s) {
+        boolean seenDigit = false;
+        boolean seenDot = false;
+        boolean seenExponent = false;
+
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+
+            if (Character.isDigit(ch)) {
+                seenDigit = true;
+            } else if (ch == '+' || ch == '-') {
+                if (i > 0 && s.charAt(i - 1) != 'e' && s.charAt(i - 1) != 'E') {
+                    return false;
+                }
+            } else if (ch == 'e' || ch == 'E') {
+                if (seenExponent || !seenDigit) {
+                    return false;
+                }
+                seenExponent = true;
+                seenDigit = false; 
+            } else if (ch == '.') {
+                if (seenDot || seenExponent) {
+                    return false;
+                }
+                seenDot = true;
+            } else {
+                return false;
+            }
+        }
+
+        return seenDigit;
+    }
+}
