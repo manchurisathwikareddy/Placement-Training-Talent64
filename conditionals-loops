@@ -1,0 +1,310 @@
+Area Of Circle Java Program
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        double r = sc.nextDouble();
+
+        double area = Math.PI * r * r;
+
+        System.out.printf("%.2f", area);
+    }
+}
+Area Of Triangle
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        double base = sc.nextDouble();
+        double height = sc.nextDouble();
+
+        double area = 0.5 * base * height;
+
+        System.out.println(area);
+    }
+}
+Area Of Rectangle Program
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        double length = sc.nextDouble();
+        double breadth = sc.nextDouble();
+
+        System.out.println(length * breadth);
+    }
+}
+Area Of Isosceles Triangle
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        double equalSide = sc.nextDouble();
+        double base = sc.nextDouble();
+
+        double height = Math.sqrt(equalSide * equalSide - (base * base) / 4);
+
+        double area = 0.5 * base * height;
+
+        System.out.println(area);
+    }
+}
+Area Of Parallelogram
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        double base = sc.nextDouble();
+        double height = sc.nextDouble();
+
+        System.out.println(base * height);
+    }
+}
+Area Of Rhombus
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        double d1 = sc.nextDouble();
+        double d2 = sc.nextDouble();
+
+        double area = (d1 * d2) / 2;
+
+        System.out.println(area);
+    }
+}
+
+Area Of Equilateral Triangle
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        double side = sc.nextDouble();
+
+        double area = (Math.sqrt(3) / 4) * side * side;
+
+        System.out.println(area);
+    }
+}
+Perimeter Of Circle
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        double r = sc.nextDouble();
+
+        double perimeter = 2 * Math.PI * r;
+
+        System.out.printf("%.2f", perimeter);
+    }
+}
+Perimeter Of Equilateral Triangle
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        double side = sc.nextDouble();
+
+        System.out.println(3 * side);
+    }
+}
+Perimeter Of Parallelogram
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        double base = sc.nextDouble();
+        double side = sc.nextDouble();
+
+        double perimeter = 2 * (base + side);
+
+        System.out.println(perimeter);
+    }
+}
+Factorial Program In Java
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        long fact = 1;
+
+        for (int i = 1; i <= n; i++) {
+            fact *= i;
+        }
+
+        System.out.println(fact);
+    }
+}
+Calculate Electricity Bill
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int units = sc.nextInt();
+        double bill;
+
+        if (units <= 100)
+            bill = units * 1.5;
+        else if (units <= 200)
+            bill = 100 * 1.5 + (units - 100) * 2.5;
+        else
+            bill = 100 * 1.5 + 100 * 2.5 + (units - 200) * 4;
+
+        System.out.println(bill);
+    }
+}
+Calculate Average Of N Numbers
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+
+        double sum = 0;
+
+        for (int i = 0; i < n; i++) {
+            sum += sc.nextDouble();
+        }
+
+        System.out.println(sum / n);
+    }
+}
+Calculate Discount Of Product
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        double price = sc.nextDouble();
+        double discount = sc.nextDouble();
+
+        double amount = price - (price * discount / 100);
+
+        System.out.println(amount);
+    }
+}
+Calculate Distance Between Two Points
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        double x1 = sc.nextDouble();
+        double y1 = sc.nextDouble();
+        double x2 = sc.nextDouble();
+        double y2 = sc.nextDouble();
+
+        double distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+
+        System.out.println(distance);
+    }
+}
+Calculate Commission Percentage
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        double sales = sc.nextDouble();
+        double commission = sc.nextDouble();
+
+        double percentage = (commission / sales) * 100;
+
+        System.out.println(percentage + "%");
+    }
+}
+Power In Java
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        double base = sc.nextDouble();
+        double exponent = sc.nextDouble();
+
+        System.out.println(Math.pow(base, exponent));
+    }
+}
+Calculate Depreciation of Value
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        double value = sc.nextDouble();
+        double rate = sc.nextDouble();
+        int years = sc.nextInt();
+
+        double finalValue = value * Math.pow((1 - rate / 100), years);
+
+        System.out.println(finalValue);
+    }
+}
+Calculate Batting Average
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int runs = sc.nextInt();
+        int outs = sc.nextInt();
+
+        if (outs == 0)
+            System.out.println("Infinity");
+        else
+            System.out.println((double) runs / outs);
+    }
+}
+Calculate CGPA Java Program
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int subjects = sc.nextInt();
+
+        double total = 0;
+
+        for (int i = 0; i < subjects; i++) {
+            total += sc.nextDouble();
+        }
+
+        double cgpa = total / subjects;
+
+        System.out.printf("%.2f", cgpa);
+    }
+}
