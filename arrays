@@ -1,302 +1,253 @@
-Build Array from Permutation
-class Solution {
+1.Given a zero-based permutation nums (0-indexed), build an array ans of the same length where ans[i] = nums[nums[i]] for each 0 <= i < nums.length and return it.
+A zero-based permutation nums is an array of distinct integers from 0 to nums.length - 1 (inclusive).
+Example 1:
+Input: nums = [0,2,1,5,3,4]
+Output: [0,1,2,4,5,3]
+Explanation: The array ans is built as follows: 
+ans = [nums[nums[0]], nums[nums[1]], nums[nums[2]], nums[nums[3]], nums[nums[4]], nums[nums[5]]]
+    = [nums[0], nums[2], nums[1], nums[5], nums[3], nums[4]]
+    = [0,1,2,4,5,3]
+Example 2:
+Input: nums = [5,0,1,2,3,4]
+Output: [4,5,0,1,2,3]
+Explanation: The array ans is built as follows:
+ans = [nums[nums[0]], nums[nums[1]], nums[nums[2]], nums[nums[3]], nums[nums[4]], nums[nums[5]]]
+    = [nums[5], nums[0], nums[1], nums[2], nums[3], nums[4]]
+    = [4,5,0,1,2,3]
+Constraints:
+1 <= nums.length <= 1000
+0 <= nums[i] < nums.length
+The elements in nums are distinct.
+
+Answer:-
+
+public class Solution {
     public int[] buildArray(int[] nums) {
-        int[] ans = new int[nums.length];
-
-        for (int i = 0; i < nums.length; i++) {
-            ans[i] = nums[nums[i]];
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            nums[i] = nums[i] + n * (nums[nums[i]] % n);
         }
-
-        return ans;
+        for (int i = 0; i < n; i++) {
+            nums[i] = nums[i] / n;
+        }
+        return nums;
     }
 }
-Concatenation of Array
-class Solution {
+
+
+2.Given an integer array nums of length n, you want to create an array ans of length 2n where ans[i] == nums[i] and ans[i + n] == nums[i] for 0 <= i < n (0-indexed).
+
+Specifically, ans is the concatenation of two nums arrays.
+
+Return the array ans.
+
+ 
+
+Example 1:
+
+Input: nums = [1,2,1]
+Output: [1,2,1,1,2,1]
+Explanation: The array ans is formed as follows:
+- ans = [nums[0],nums[1],nums[2],nums[0],nums[1],nums[2]]
+- ans = [1,2,1,1,2,1]
+Example 2:
+
+Input: nums = [1,3,2,1]
+Output: [1,3,2,1,1,3,2,1]
+Explanation: The array ans is formed as follows:
+- ans = [nums[0],nums[1],nums[2],nums[3],nums[0],nums[1],nums[2],nums[3]]
+- ans = [1,3,2,1,1,3,2,1]
+ 
+
+Constraints:
+
+n == nums.length
+1 <= n <= 1000
+1 <= nums[i] <= 1000
+
+Answer:-
+
+public class Solution {
     public int[] getConcatenation(int[] nums) {
         int n = nums.length;
         int[] ans = new int[2 * n];
-
         for (int i = 0; i < n; i++) {
             ans[i] = nums[i];
             ans[i + n] = nums[i];
         }
-
         return ans;
     }
 }
-Running Sum of 1d Array
-class Solution {
+
+3.Given an array nums. We define a running sum of an array as runningSum[i] = sum(nums[0]…nums[i]).
+
+Return the running sum of nums.
+
+ 
+
+Example 1:
+
+Input: nums = [1,2,3,4]
+Output: [1,3,6,10]
+Explanation: Running sum is obtained as follows: [1, 1+2, 1+2+3, 1+2+3+4].
+Example 2:
+
+Input: nums = [1,1,1,1,1]
+Output: [1,2,3,4,5]
+Explanation: Running sum is obtained as follows: [1, 1+1, 1+1+1, 1+1+1+1, 1+1+1+1+1].
+Example 3:
+
+Input: nums = [3,1,2,10,1]
+Output: [3,4,6,16,17]
+ 
+
+Constraints:
+
+1 <= nums.length <= 1000
+-10^6 <= nums[i] <= 10^6
+
+Answer:-
+
+public class Solution {
     public int[] runningSum(int[] nums) {
-
         for (int i = 1; i < nums.length; i++) {
-            nums[i] = nums[i] + nums[i - 1];
+            nums[i] += nums[i - 1];
         }
-
         return nums;
     }
 }
-Richest Customer Wealth
-class Solution {
-    public int maximumWealth(int[][] accounts) {
 
-        int max = 0;
+4.Given an m x n matrix, return all elements of the matrix in spiral order.
 
-        for (int i = 0; i < accounts.length; i++) {
-            int sum = 0;
+ 
 
-            for (int j = 0; j < accounts[i].length; j++) {
-                sum += accounts[i][j];
-            }
+Example 1:
 
-            if (sum > max) {
-                max = sum;
-            }
-        }
 
-        return max;
-    }
-}
-Shuffle the Array
-class Solution {
-    public int[] shuffle(int[] nums, int n) {
+Input: matrix = [[1,2,3],[4,5,6],[7,8,9]]
+Output: [1,2,3,6,9,8,7,4,5]
+Example 2:
 
-        int[] ans = new int[2 * n];
 
-        int index = 0;
+Input: matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]
+Output: [1,2,3,4,8,12,11,10,9,5,6,7]
+ 
 
-        for (int i = 0; i < n; i++) {
-            ans[index++] = nums[i];
-            ans[index++] = nums[i + n];
-        }
+Constraints:
 
-        return ans;
-    }
-}
-Spiral Matrix
-import java.util.*;
+m == matrix.length
+n == matrix[i].length
+1 <= m, n <= 10
+-100 <= matrix[i][j] <= 100
 
-class Solution {
+Answer:-
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
     public List<Integer> spiralOrder(int[][] matrix) {
-
-        List<Integer> ans = new ArrayList<>();
-
+        List<Integer> result = new ArrayList<>();
+        if (matrix == null || matrix.length == 0) {
+            return result;
+        }
+        
         int top = 0;
         int bottom = matrix.length - 1;
         int left = 0;
         int right = matrix[0].length - 1;
-
+        
         while (top <= bottom && left <= right) {
-
-            for (int i = left; i <= right; i++)
-                ans.add(matrix[top][i]);
+            for (int i = left; i <= right; i++) {
+                result.add(matrix[top][i]);
+            }
             top++;
-
-            for (int i = top; i <= bottom; i++)
-                ans.add(matrix[i][right]);
+            
+            for (int i = top; i <= bottom; i++) {
+                result.add(matrix[i][right]);
+            }
             right--;
-
+            
             if (top <= bottom) {
-                for (int i = right; i >= left; i--)
-                    ans.add(matrix[bottom][i]);
+                for (int i = right; i >= left; i--) {
+                    result.add(matrix[bottom][i]);
+                }
                 bottom--;
             }
-
+            
             if (left <= right) {
-                for (int i = bottom; i >= top; i--)
-                    ans.add(matrix[i][left]);
+                for (int i = bottom; i >= top; i--) {
+                    result.add(matrix[i][left]);
+                }
                 left++;
             }
         }
-
-        return ans;
+        
+        return result;
     }
 }
-Spiral Matrix II
-class Solution {
-    public int[][] generateMatrix(int n) {
 
-        int[][] ans = new int[n][n];
+5.You are given an array points containing the coordinates of points on a 2D plane, sorted by the x-values, where points[i] = [xi, yi] such that xi < xj for all 1 <= i < j <= points.length. You are also given an integer k.
 
-        int top = 0, bottom = n - 1;
-        int left = 0, right = n - 1;
-        int num = 1;
+Return the maximum value of the equation yi + yj + |xi - xj| where |xi - xj| <= k and 1 <= i < j <= points.length.
 
-        while (top <= bottom && left <= right) {
+It is guaranteed that there exists at least one pair of points that satisfy the constraint |xi - xj| <= k.
 
-            for (int i = left; i <= right; i++)
-                ans[top][i] = num++;
-            top++;
+ 
 
-            for (int i = top; i <= bottom; i++)
-                ans[i][right] = num++;
-            right--;
+Example 1:
 
-            for (int i = right; i >= left; i--)
-                ans[bottom][i] = num++;
-            bottom--;
+Input: points = [[1,3],[2,0],[5,10],[6,-10]], k = 1
+Output: 4
+Explanation: The first two points satisfy the condition |xi - xj| <= 1 and if we calculate the equation we get 3 + 0 + |1 - 2| = 4. Third and fourth points also satisfy the condition and give a value of 10 + -10 + |5 - 6| = 1.
+No other pairs satisfy the condition, so we return the max of 4 and 1.import java.util.ArrayDeque;
+import java.util.Deque;
 
-            for (int i = bottom; i >= top; i--)
-                ans[i][left] = num++;
-            left++;
-        }
-
-        return ans;
-    }
-}
-Spiral Matrix III
-class Solution {
-    public int[][] spiralMatrixIII(int rows, int cols, int rStart, int cStart) {
-
-        int[][] ans = new int[rows * cols][2];
-
-        int count = 0;
-        ans[count++] = new int[]{rStart, cStart};
-
-        int steps = 1;
-
-        while (count < rows * cols) {
-
-            for (int i = 0; i < steps; i++) {
-                cStart++;
-                if (rStart >= 0 && rStart < rows && cStart >= 0 && cStart < cols)
-                    ans[count++] = new int[]{rStart, cStart};
-            }
-
-            for (int i = 0; i < steps; i++) {
-                rStart++;
-                if (rStart >= 0 && rStart < rows && cStart >= 0 && cStart < cols)
-                    ans[count++] = new int[]{rStart, cStart};
-            }
-
-            steps++;
-
-            for (int i = 0; i < steps; i++) {
-                cStart--;
-                if (rStart >= 0 && rStart < rows && cStart >= 0 && cStart < cols)
-                    ans[count++] = new int[]{rStart, cStart};
-            }
-
-            for (int i = 0; i < steps; i++) {
-                rStart--;
-                if (rStart >= 0 && rStart < rows && cStart >= 0 && cStart < cols)
-                    ans[count++] = new int[]{rStart, cStart};
-            }
-
-            steps++;
-        }
-
-        return ans;
-    }
-}
-Set Matrix Zeroes
-class Solution {
-    public void setZeroes(int[][] matrix) {
-
-        int m = matrix.length;
-        int n = matrix[0].length;
-
-        boolean[] rows = new boolean[m];
-        boolean[] cols = new boolean[n];
-
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (matrix[i][j] == 0) {
-                    rows[i] = true;
-                    cols[j] = true;
-                }
-            }
-        }
-
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (rows[i] || cols[j])
-                    matrix[i][j] = 0;
-            }
-        }
-    }
-}
-Product of Array Except Self
-class Solution {
-    public int[] productExceptSelf(int[] nums) {
-
-        int n = nums.length;
-        int[] ans = new int[n];
-
-        ans[0] = 1;
-
-        for (int i = 1; i < n; i++) {
-            ans[i] = ans[i - 1] * nums[i - 1];
-        }
-
-        int right = 1;
-
-        for (int i = n - 1; i >= 0; i--) {
-            ans[i] *= right;
-            right *= nums[i];
-        }
-
-        return ans;
-    }
-}
-Max Value of Equation
-import java.util.*;
-
-class Solution {
+public class Solution {
     public int findMaxValueOfEquation(int[][] points, int k) {
-
-        int ans = Integer.MIN_VALUE;
-
-        Deque<int[]> deque = new ArrayDeque<>();
-
-        for (int[] p : points) {
-            int x = p[0];
-            int y = p[1];
-
-            while (!deque.isEmpty() && x - deque.peekFirst()[0] > k) {
+        int maxValue = Integer.MIN_VALUE;
+        Deque<Integer> deque = new ArrayDeque<>();
+        
+        for (int j = 0; j < points.length; j++) {
+            while (!deque.isEmpty() && points[j][0] - points[deque.peekFirst()][0] > k) {
                 deque.pollFirst();
             }
-
+            
             if (!deque.isEmpty()) {
-                ans = Math.max(ans,
-                        y + x + deque.peekFirst()[1]);
+                int i = deque.peekFirst();
+                int currentVal = points[j][1] + points[j][0] + (points[i][1] - points[i][0]);
+                maxValue = Math.max(maxValue, currentVal);
             }
-
-            int value = y - x;
-
-            while (!deque.isEmpty() &&
-                    deque.peekLast()[1] <= value) {
-                deque.pollLast();
+            
+            int currentDiff = points[j][1] - points[j][0];
+            while (!deque.isEmpty()) {
+                int lastIdx = deque.peekLast();
+                if (points[lastIdx][1] - points[lastIdx][0] <= currentDiff) {
+                    deque.pollLast();
+                } else {
+                    break;
+                }
             }
-
-            deque.offerLast(new int[]{x, value});
+            
+            deque.offerLast(j);
         }
-
-        return ans;
+        
+        return maxValue;
     }
 }
-First Missing Positive
-class Solution {
-    public int firstMissingPositive(int[] nums) {
 
-        int n = nums.length;
+Input: points = [[0,0],[3,0],[9,2]], k = 3
+Output: 3
+Explanation: Only the first two points have an absolute difference of 3 or less in the x-values, and give the value of 0 + 0 + |0 - 3| = 3.
+ 
 
-        for (int i = 0; i < n; i++) {
+Constraints:
 
-            while (nums[i] > 0 &&
-                   nums[i] <= n &&
-                   nums[nums[i] - 1] != nums[i]) {
+2 <= points.length <= 105
+points[i].length == 2
+-108 <= xi, yi <= 108
+0 <= k <= 2 * 108
+xi < xj for all 1 <= i < j <= points.length
+xi form a strictly increasing sequence.
 
-                int temp = nums[i];
-                nums[i] = nums[temp - 1];
-                nums[temp - 1] = temp;
-            }
-        }
-
-        for (int i = 0; i < n; i++) {
-            if (nums[i] != i + 1)
-                return i + 1;
-        }
-
-        return n + 1;
-    }
-}
+Answer:-
